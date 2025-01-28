@@ -14,9 +14,9 @@ const index = () => {
 
       }}>
         
-        <Text style={{fontSize: 40, color: s.primary[300], fontFamily: 'Rubik-ExtraBold',  textAlign: 'center'} } >Hello !, My Name is Nayan </Text>
+        <Text style={{fontSize: 40, color: s.primary[300], fontFamily: 'Rubik-ExtraBold',  textAlign: 'center'} } >Hello !,n </Text>
 
-        <Text style={[s.heading,{fontSize: 30,textAlign: 'center'} ]} >Whelcome To My Android App</Text>
+        <Text style={[s.heading,{fontSize: 30,textAlign: 'center'} ]} >Whelcome To ReState</Text>
       
         <Link style={{ fontSize:20, fontFamily: 'Rubik-SemiBold' , color: s.danger}} href="/sign-up"> SignUp</Link>
 

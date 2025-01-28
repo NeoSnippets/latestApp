@@ -1,7 +1,8 @@
 import { Tabs } from "expo-router";
 import { Image, ImageSourcePropType, Text, View } from "react-native";
-
+import { StyleSheet } from 'react-native';
 import icons from "@/constants/icons";
+import {s} from '../../styles'
 
 const TabIcon = ({
   focused,
@@ -12,7 +13,7 @@ const TabIcon = ({
   icon: ImageSourcePropType;
   title: string;
 }) => (
-  <View className="flex-1 mt-3 flex flex-col items-center">
+  <View style={styles.container}>
     <Image
       source={icon}
       tintColor={focused ? "#0061FF" : "#666876"}
@@ -20,11 +21,10 @@ const TabIcon = ({
       className="size-6"
     />
     <Text
-      className={`${
-        focused
-          ? "text-primary-300 font-rubik-medium"
-          : "text-black-200 font-rubik"
-      } text-xs w-full text-center mt-1`}
+      style={[
+        styles.textcontainer,
+        focused ? styles.focused : styles.notFocused,
+      ]}
     >
       {title}
     </Text>
@@ -78,5 +78,29 @@ const TabsLayout = () => {
     </Tabs>
   );
 };
+
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1, // equivalent to "flex-1"
+    marginTop: 12, // equivalent to "mt-3" (12px for marginTop)
+    flexDirection: 'column', // equivalent to "flex-col"
+    alignItems: 'center', // equivalent to "items-center"
+  },
+  textcontainer: {
+    fontSize: 12, // equivalent to text-xs (12px)
+    width: '100%', // equivalent to w-full
+    textAlign: 'center', // equivalent to text-center
+    marginTop: 4, // equivalent to mt-1 (4px)
+  },
+  focused: {
+    color:  s.primary[300], // equivalent to text-primary-300 (replace with your actual color)
+    fontFamily: '-Medium', // equivalent to font-rubik-medium
+  },
+  notFocused: {
+    color:  s.black[200], // equivalent to text-black-200 (replace with your actual color)
+    fontFamily: 'Rubik', // equivalent to font-rubik
+  },
+});
 
 export default TabsLayout;

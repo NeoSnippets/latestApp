@@ -2,8 +2,9 @@ import { View, Text, ScrollView, StyleSheet, Image, TouchableOpacity,TextInput }
 import React, {useState} from 'react'
 import { s } from '@/app/styles'; // Import global styles
 import { SafeAreaView } from 'react-native-safe-area-context';
-import {useLocalSearchParams, usePathname} from 'expo-router';
+import {router, useLocalSearchParams, usePathname} from 'expo-router';
 import icons from '@/constants/icons';
+import {useDebouncedCallback} from 'use-debounce'
 
 
 
@@ -14,8 +15,11 @@ const Search = () => {
     const param = useLocalSearchParams<{query?: string}>();
     const [search, setSearch] = useState(param.query);
 
+    const debouncedSearch = useDebouncedCallback((text: string) => router.setParams({query: text}), 500)
+
     const handleSearch = ( text: string) => {
         setSearch(text);
+        debouncedSearch(text);
     }
 
     return(

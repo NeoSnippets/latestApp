@@ -14,7 +14,7 @@ const index = () => {
 
       }}>
         
-        <Text style={{fontSize: 40, color: s.primary[300], fontFamily: 'Rubik-ExtraBold',  textAlign: 'center'} } >Hello !,n </Text>
+        <Text style={{fontSize: 40, color: s.primary[300], fontFamily: 'Rubik-ExtraBold',  textAlign: 'center'} } >Hello !,</Text>
 
         <Text style={[s.heading,{fontSize: 30,textAlign: 'center'} ]} >Whelcome To ReState</Text>
       

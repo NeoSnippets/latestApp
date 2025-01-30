@@ -1,12 +1,28 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
 
-const explore = () => {
+const App = () => {
   return (
-    <View>
-      <Text>explore</Text>
+    <View style={styles.container}>
+      <View style={styles.box} />
     </View>
-  )
-}
+  );
+};
 
-export default explore
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#f5f5f5',
+  },
+  box: {
+    width: 100,
+    height: 100,
+    backgroundColor: '#FFFFFF',
+    borderWidth: 2, // Border thickness
+    borderColor: 'black', // Black border color
+  },
+});
+
+export default App;

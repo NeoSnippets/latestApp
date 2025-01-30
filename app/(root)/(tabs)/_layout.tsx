@@ -18,7 +18,7 @@ const TabIcon = ({
       source={icon}
       tintColor={focused ? "#0061FF" : "#666876"}
       resizeMode="contain"
-      className="size-6"
+      style={{width:20, height:20}}
     />
     <Text
       style={[
@@ -82,7 +82,7 @@ const TabsLayout = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1, // equivalent to "flex-1"
+     // equivalent to "flex-1"
     marginTop: 12, // equivalent to "mt-3" (12px for marginTop)
     flexDirection: 'column', // equivalent to "flex-col"
     alignItems: 'center', // equivalent to "items-center"
@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
   },
   focused: {
     color:  s.primary[300], // equivalent to text-primary-300 (replace with your actual color)
-    fontFamily: '-Medium', // equivalent to font-rubik-medium
+    fontFamily: 'Rubik-Medium', // equivalent to font-rubik-medium
   },
   notFocused: {
     color:  s.black[200], // equivalent to text-black-200 (replace with your actual color)

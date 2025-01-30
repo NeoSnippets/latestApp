@@ -78,8 +78,8 @@ const profile = () => {
                   </View>
                 </View>
                 <View style={{flex: 1, flexDirection: 'column', marginTop: 20,gap:20}}>
-                    < SettingsIteam icon={icons.calendar} title="My Booking"  />
-                    < SettingsIteam icon={icons.wallet} title="Payment"  />
+                    < SettingsIteam icon={icons.calendar} title="My Booking" textStyle={undefined}  />
+                    < SettingsIteam icon={icons.wallet} title="Payment" textStyle={undefined}  />
 
                 </View>
                 {/*divider */}
@@ -87,7 +87,7 @@ const profile = () => {
 
                 <View style={{flex: 1, flexDirection: 'column', marginTop: 20,gap:20, borderRadius: 9999, borderColor: s.primary[200]}}>
                     {settings.slice(2).map((item, index)=>(
-                      < SettingsIteam key={index}{...item}/>
+                      < SettingsIteam textStyle={undefined} key={index} {...item}/>
                     ))}
                 </View>
                 <View style={{paddingBottom:10}}></View>

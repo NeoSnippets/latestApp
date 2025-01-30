@@ -21,7 +21,7 @@ const SettingsIteam = ({ icon, title, onPress, textStyle, showArrow = true}: Set
               <View style={styles.contain}>
                 <Image source={icon} style={styles.image}></Image>
                 {textStyle? <Text style={styles.text}  >{title}</Text>
-                : <Text style={styles.textDanger}  >{title}</Text>
+                : <Text style={styles.textDnager}  >{title}</Text>
               }
               </View>
               {showArrow && <Image source={icons.rightArrow} style={{width: 10, height:20,}} />}

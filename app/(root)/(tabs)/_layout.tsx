@@ -33,15 +33,19 @@ const TabIcon = ({
 
 const TabsLayout = () => {
   return (
+    <View style={{ flex: 1 }}>
     <Tabs
       screenOptions={{
         tabBarShowLabel: false,
         tabBarStyle: {
-          backgroundColor: "white",
-          position: "absolute",
-          borderTopColor: "#0061FF1A",
+          backgroundColor: 'white',
+          position: 'absolute', // Keeps the tab bar fixed at the bottom
+          borderTopColor: '#0061FF1A',
           borderTopWidth: 1,
           minHeight: 70,
+          bottom: 0,
+          width: '100%',
+          
         },
       }}
     >
@@ -76,6 +80,7 @@ const TabsLayout = () => {
         }}
       />
     </Tabs>
+    </View>
   );
 };
 

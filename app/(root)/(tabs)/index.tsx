@@ -1,4 +1,4 @@
-import { View, Text, Image,StyleSheet } from 'react-native'
+import { View, Text, Image,StyleSheet, ScrollView, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { Link, Stack } from 'expo-router'
 import { s } from '../../styles'; // Import global styles
@@ -6,6 +6,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import images from '@/constants/images';
 import icons from '@/constants/icons';
 import Search from '@/components/Search';
+import { Card, FeacherCard } from '@/components/Card';
 //import Card from '@/components/Card'
 
 
@@ -18,7 +19,7 @@ const index = () => {
           <View style={{flexDirection: 'row', alignItems: 'center',
               justifyContent: 'space-between' }}>
                 <View style={{flex: 1, flexDirection: 'row', alignItems: 'center', gap: 10}} >
-                  <Image source={images.avatar} style={styles.image} />
+                  <Image source={images.avatar2} style={styles.image} />
                 
                 <View style={{ flexDirection: 'column', alignItems: 'start',
               justifyContent: 'space-between', marginTop:10 }}>
@@ -35,9 +36,29 @@ const index = () => {
 
         </View>
           <Search/>
+
+        <ScrollView>
+          <View style={{marginTop:12}}>
+            <View style={{ flexDirection: 'row', justifyContent:'space-between', alignItems: 'center'}}>
+              <Text style={{ fontFamily: 'Rubik-Bold', fontSize: 16}}>Feactured</Text>
+              <TouchableOpacity>
+                <Text style={{color: s.primary[300], fontFamily: 'Rubik-Bold', fontSize: 13}}> See All</Text>
+              </TouchableOpacity>
+            </View>            
+          </View>
           <View>
             
-          </View>
+            </View>
+           
+            <FeacherCard/>
+           
+
+                 
+          
+
+            <Card/>
+            </ScrollView>
+          
       </SafeAreaView>
   )
 }

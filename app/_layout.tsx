@@ -3,6 +3,7 @@ import {useFonts} from "expo-font"
 import { useEffect } from "react";
 import * as SplashScreen from "expo-splash-screen";
 import GlobalProvider from "@/lib/global-provider";
+import { KeyboardAvoidingView, Platform } from "react-native";
 
 
 export default function RootLayout() {
@@ -26,7 +27,13 @@ export default function RootLayout() {
   }
   return (
         <GlobalProvider>
+          <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        style={{ flex: 1 }}
+      >
           <Stack screenOptions={{headerShown : false }} />
+          
+          </KeyboardAvoidingView>
         </GlobalProvider>
 
 

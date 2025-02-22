@@ -49,8 +49,10 @@ const profile = () => {
       console.log("Logout Succesfull");
       refetch(); // revalidet current login user then vw naviget on signin page
       router.push('../sign-up')
+
     } else {
       console.log("Logout Error");
+    
     }
     
   };

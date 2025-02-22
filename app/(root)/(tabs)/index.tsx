@@ -7,6 +7,7 @@ import images from '@/constants/images';
 import icons from '@/constants/icons';
 import Search from '@/components/Search';
 import { Card, FeacherCard } from '@/components/Card';
+import Filter from '@/components/Filter';
 //import Card from '@/components/Card'
 
 
@@ -35,9 +36,10 @@ const index = () => {
             </View>
 
         </View>
+       
+       <ScrollView>
           <Search/>
 
-        <ScrollView>
           <View style={{marginTop:12}}>
             <View style={{ flexDirection: 'row', justifyContent:'space-between', alignItems: 'center'}}>
               <Text style={{ fontFamily: 'Rubik-Bold', fontSize: 16}}>Feactured</Text>
@@ -46,19 +48,34 @@ const index = () => {
               </TouchableOpacity>
             </View>            
           </View>
-          <View>
-            
-            </View>
-           
+          
+           <ScrollView horizontal style={{flex: 1, flexDirection:'row', gap:150, marginTop:15, position:'relative'}}>
             <FeacherCard/>
-           
+            <FeacherCard/>
+                        <FeacherCard/>
 
-                 
-          
+            </ScrollView>          
 
+
+           <View style={{marginTop:20}}>
+            <View style={{ flexDirection: 'row', justifyContent:'space-between', alignItems: 'center'}}>
+              <Text style={{ fontFamily: 'Rubik-Bold', fontSize: 16}}>Our Recomondetion</Text>
+              <TouchableOpacity>
+                <Text style={{color: s.primary[300], fontFamily: 'Rubik-Bold', fontSize: 13}}> See All</Text>
+              </TouchableOpacity>
+            </View>            
+          </View>
+          <Filter />
+
+          <View style={{flex: 1, flexDirection:'row', gap:20, }}>
             <Card/>
-            </ScrollView>
-          
+            <Card/>
+          </View>    
+          <Text>Hello</Text>         
+           
+        </ScrollView> 
+        <Text style={{color:'black'}}>Hello</Text>         
+                    
       </SafeAreaView>
   )
 }
@@ -70,6 +87,7 @@ const styles = StyleSheet.create({
     height: '100%', // Equivalent to h-full
     padding: 15, 
     paddingBottom: 15, 
+    position: 'relative',
 
    
   },

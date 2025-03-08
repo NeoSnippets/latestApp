@@ -52,7 +52,8 @@ const profile = () => {
 
     } else {
       console.log("Logout Error");
-    
+      router.push('../sign-up')
+
     }
     
   };

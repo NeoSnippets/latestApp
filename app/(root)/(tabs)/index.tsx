@@ -1,6 +1,6 @@
-import { View, Text, Image,StyleSheet, ScrollView, TouchableOpacity } from 'react-native'
-import React from 'react'
-import { Link, Stack } from 'expo-router'
+import { View, Text, Image,StyleSheet, ScrollView, TouchableOpacity, FlatList, Button, ActivityIndicator } from 'react-native'
+import React, { useEffect } from 'react'
+import { Link, router, Stack, useLocalSearchParams } from 'expo-router'
 import { s } from '../../styles'; // Import global styles
 import { SafeAreaView } from 'react-native-safe-area-context';
 import images from '@/constants/images';
@@ -8,74 +8,140 @@ import icons from '@/constants/icons';
 import Search from '@/components/Search';
 import { Card, FeacherCard } from '@/components/Card';
 import Filter from '@/components/Filter';
+import { useGlobalContext } from '@/lib/global-provider';
+import seed from '@/lib/seed';
+import { getLatestProperties, getProperties } from '@/lib/appwrite';
+import { useAppwrite } from '@/lib/useAppwrite';
+import NoResults from '@/components/NoResult';
 //import Card from '@/components/Card'
+import Comment from '@/components/Comment';
 
 
 
 
 const index = () => {
+  const {user}= useGlobalContext();
+  const params = useLocalSearchParams<{ query?: string; filter?: string }>();
+
+  const { data: latestProperties, loading: latestPropertiesLoading } =
+    useAppwrite({
+      fn: getLatestProperties,
+    });
+
+  const {
+    data: properties,
+    refetch,
+    loading,
+  } = useAppwrite({
+    fn: getProperties,
+    params: {
+      filter: params.filter!,
+      query: params.query!,
+      limit: 6,
+    },
+    skip: true,
+  });
+
+  useEffect(() => {
+    refetch({
+      filter: params.filter!,
+      query: params.query!,
+      limit: 6,
+    });
+  }, [params.filter, params.query]);
+  
+  const handleCardPress = (id: string) => router.push(`/property/${id}`);
+
+
   return (
       <SafeAreaView style ={styles.container}>
-        <View style={{padding: 1 }}>
-          <View style={{flexDirection: 'row', alignItems: 'center',
-              justifyContent: 'space-between' }}>
-                <View style={{flex: 1, flexDirection: 'row', alignItems: 'center', gap: 10}} >
-                  <Image source={images.avatar2} style={styles.image} />
-                
-                <View style={{ flexDirection: 'column', alignItems: 'start',
-              justifyContent: 'space-between', marginTop:10 }}>
-                <Text style={{ fontFamily: 'Rubik-SemiBold', color: s.black[100], fontSize:12}}>
-                  Good Morning
-                </Text>
-                <Text style={{ fontFamily: 'Rubik-SemiBold', color: s.black[300], fontSize:18}}>
-                  Nayan
-                </Text>
-              </View>              
-            </View>
-            <Image source={icons.bell} style={{width: 20, height: 20,}}></Image>
-            </View>
-
-        </View>
        
-       <ScrollView>
-          <Search/>
+        <FlatList
+          data={properties}
+          renderItem={({item}) => <Card item={item} onPress={()=> handleCardPress(item.$id)} />}
+          keyExtractor={(item) => item.toString()}
+          numColumns={2}
+          contentContainerStyle={{paddingBottom: 0,}}
+          columnWrapperStyle={{justifyContent: 'space-between', gap: 20,}}
+          showsVerticalScrollIndicator={false}
+          ListEmptyComponent={
+            loading ? (
+              <ActivityIndicator size="large" color="#3b82f6" style={{marginTop: 20}} />
+            ) : (
+              <NoResults />
+            )
+          }
+          ListHeaderComponent={<><View style={{ padding: 1 }}>
+            <View style={{
+              flexDirection: 'row', alignItems: 'center',
+              justifyContent: 'space-between'
+            }}>
+              <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', gap: 10 }}>
+                <Image source={{uri: user?.avatar}} style={styles.image} />
 
-          <View style={{marginTop:12}}>
-            <View style={{ flexDirection: 'row', justifyContent:'space-between', alignItems: 'center'}}>
-              <Text style={{ fontFamily: 'Rubik-Bold', fontSize: 16}}>Feactured</Text>
-              <TouchableOpacity>
-                <Text style={{color: s.primary[300], fontFamily: 'Rubik-Bold', fontSize: 13}}> See All</Text>
-              </TouchableOpacity>
-            </View>            
-          </View>
-          
-           <ScrollView horizontal style={{flex: 1, flexDirection:'row', gap:150, marginTop:15, position:'relative'}}>
-            <FeacherCard/>
-            <FeacherCard/>
-                        <FeacherCard/>
+                <View style={{
+                  flexDirection: 'column', alignItems: 'start',
+                  justifyContent: 'space-between', marginTop: 10
+                }}>
+                  <Text style={{ fontFamily: 'Rubik-SemiBold', color: s.black[100], fontSize: 12 }}>
+                    Good Morning
+                  </Text>
+                  <Text style={{ fontFamily: 'Rubik-SemiBold', color: s.black[300], fontSize: 18 }}>
+                    {user?.name}
+                  </Text>
+                </View>
+              </View>
+              <Image source={icons.bell} style={{ width: 20, height: 20, }}></Image>
+            </View>
 
-            </ScrollView>          
+          </View><ScrollView>
+              <Search />
 
+              <View style={{ marginTop: 12 }}>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <Text style={{ fontFamily: 'Rubik-Bold', fontSize: 16 }}>Feactured</Text>
+                  <TouchableOpacity>
+                    <Text style={{ color: s.primary[300], fontFamily: 'Rubik-Bold', fontSize: 13 }}> See All</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
 
-           <View style={{marginTop:20}}>
-            <View style={{ flexDirection: 'row', justifyContent:'space-between', alignItems: 'center'}}>
-              <Text style={{ fontFamily: 'Rubik-Bold', fontSize: 16}}>Our Recomondetion</Text>
-              <TouchableOpacity>
-                <Text style={{color: s.primary[300], fontFamily: 'Rubik-Bold', fontSize: 13}}> See All</Text>
-              </TouchableOpacity>
-            </View>            
-          </View>
-          <Filter />
-
-          <View style={{flex: 1, flexDirection:'row', gap:20, }}>
-            <Card/>
-            <Card/>
-          </View>    
-          <Text>Hello</Text>         
-           
-        </ScrollView> 
-        <Text style={{color:'black'}}>Hello</Text>         
+              {latestPropertiesLoading ? (
+                <ActivityIndicator size="large" color='#3b82f6' />
+              ) : !latestProperties || latestProperties.length === 0 ? (
+                <NoResults />
+              ) : (
+               <FlatList
+                    data={latestProperties}
+                    renderItem={({item}) => <FeacherCard item={item} onPress={()=> handleCardPress(item.$id)} />}
+                    keyExtractor={(item) => item.toString()}
+                    horizontal
+                    bounces={false}
+                    showsHorizontalScrollIndicator={false}
                     
+                   />
+
+                   )}
+
+              
+
+
+              <View style={{ marginTop: 20 }}>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <Text style={{ fontFamily: 'Rubik-Bold', fontSize: 16 }}>Our Recomondetion</Text>
+                  <TouchableOpacity>
+                    <Text style={{ color: s.primary[300], fontFamily: 'Rubik-Bold', fontSize: 13 }}> See All</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+              <Filter />
+
+             
+             
+            </ScrollView></>         
+                    }
+        />
+        
       </SafeAreaView>
   )
 }

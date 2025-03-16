@@ -15,11 +15,15 @@ import { useAppwrite } from '@/lib/useAppwrite';
 import NoResults from '@/components/NoResult';
 //import Card from '@/components/Card'
 import Comment from '@/components/Comment';
+import { useRouter } from "expo-router"
+import AnimatedProfile from "@/components/AnimatedProfile";
 
 
 
 
 const index = () => {
+  const router = useRouter()
+
   const {user}= useGlobalContext();
   const params = useLocalSearchParams<{ query?: string; filter?: string }>();
 
@@ -51,11 +55,14 @@ const index = () => {
   }, [params.filter, params.query]);
   
   const handleCardPress = (id: string) => router.push(`/property/${id}`);
-
+  const handleAiPress =  () => {
+    
+    
+  };
 
   return (
       <SafeAreaView style ={styles.container}>
-       
+
         <FlatList
           data={properties}
           renderItem={({item}) => <Card item={item} onPress={()=> handleCardPress(item.$id)} />}
@@ -92,7 +99,14 @@ const index = () => {
                 </View>
               </View>
               <Image source={icons.bell} style={{ width: 20, height: 20, }}></Image>
+              <TouchableOpacity onPress={() => router.push("../home")}>
+              <View>
+                  <Image source={images.aiImage} style={{ width: 50, height: 50, }}></Image>
+                  <Text style={{alignItems:'center', position: 'absolute', top: 6, right: 8,fontFamily: 'Rubik-SemiBold',fontSize: 25, color:'#000000'}}>AI </Text>
+              </View>
+              </TouchableOpacity>
             </View>
+            
 
           </View><ScrollView>
               <Search />
@@ -168,6 +182,12 @@ const styles = StyleSheet.create({
     width: '45', // Fill the width of its container
     height: '45', // Fixed height for the image
     borderRadius: 9999
+  },
+  animation: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#222",
   },
   line:{
     flex: 1,

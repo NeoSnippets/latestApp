@@ -6,7 +6,9 @@ import images from '@/constants/images';
 import icons from '@/constants/icons';
 import {login} from '@/lib/appwrite';
 
+
 const App = () => {
+
   // Function to handle login submission
   const handleLogin = async () => {
     console.log("Login button pressed");

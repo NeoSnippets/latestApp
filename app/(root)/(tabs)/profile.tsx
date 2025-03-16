@@ -82,7 +82,11 @@ const profile = () => {
                 </View>
                 <View style={{flex: 1, flexDirection: 'column', marginTop: 20,gap:20}}>
                     < SettingsIteam icon={icons.calendar} title="My Booking" textStyle={undefined}  />
+                    < SettingsIteam icon={icons.wallet} title="My Products" textStyle={undefined}  />
+                    < SettingsIteam icon={icons.wallet} title="My Articles" textStyle={undefined}  />
+
                     < SettingsIteam icon={icons.wallet} title="Payment" textStyle={undefined}  />
+
 
                 </View>
                 {/*divider */}

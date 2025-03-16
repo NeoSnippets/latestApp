@@ -50,7 +50,7 @@ export const s = StyleSheet.create({
     primary: {
       100: "#0061FF0A",
       200: "#0061FF1A",
-      300: "#0061FF",
+      300: "#4CAF50",
     },
     accent: {
       100: "#FBFBFD",

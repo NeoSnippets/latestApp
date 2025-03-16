@@ -16,7 +16,7 @@ const TabIcon = ({
   <View style={styles.container}>
     <Image
       source={icon}
-      tintColor={focused ? "#0061FF" : "#666876"}
+      tintColor={focused ? "#4CAF50" : "#666876"}
       resizeMode="contain"
       style={{width:20, height:20}}
     />
@@ -66,6 +66,16 @@ const TabsLayout = () => {
           headerShown: false,
           tabBarIcon: ({ focused }) => (
             <TabIcon focused={focused} icon={icons.search} title="Explore" />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="articles-feed"
+        options={{
+          title: "Article",
+          headerShown: false,
+          tabBarIcon: ({ focused }) => (
+            <TabIcon focused={focused} icon={icons.article} title="Article" />
           ),
         }}
       />

@@ -101,19 +101,20 @@ const Property = () => {
           </View>
 
           {/* Property Information */}
+          <ScrollView horizontal>
           <View style={styles.propertyInfo}>
             <View style={styles.infoItem}>
               <View style={styles.container}>
                 <Image source={icons.bed} style={styles.iconSize} />
               </View>
-              <Text style={styles.infoText}>{property?.Bedroom} Beds</Text>
+              <Text style={styles.infoText}>{property?.Fertilizers_Percentages}Fertilizers</Text>
             </View>
 
             <View style={styles.infoItem}>
               <View style={styles.container}>
                 <Image source={icons.bath} style={styles.iconSize} />
               </View>
-              <Text style={styles.infoText}>{property?.Bathroom} Baths</Text>
+              <Text style={styles.infoText}>{property?.Pesticides_Insecticides} Pesticides</Text>
             </View>
 
             <View style={styles.infoItem}>
@@ -123,7 +124,7 @@ const Property = () => {
               <Text style={styles.infoText}>{property?.area} sqft</Text>
             </View>
           </View>
-
+          </ScrollView>
           {/* Agent Information */}
           <View style={styles.agentSection}>
             <Text style={styles.agentTitle}>Agent</Text>
@@ -205,7 +206,7 @@ const Property = () => {
 
           {/* Location */}
           <View style={styles.locationSection}>
-            <Text style={styles.sectionTitle}>Location</Text>
+            <Text style={styles.sectionTitle}>Farm Location</Text>
             <View style={styles.locationInfo}>
               <Image source={icons.location} style={styles.locationIcon} />
               <Text style={styles.locationText}>{property?.address}</Text>
@@ -297,7 +298,7 @@ const styles = StyleSheet.create({
   },
   backButton: {
     flexDirection: "row",
-    backgroundColor: "#3B82F6", // Primary color
+    backgroundColor: "#4CAF50", // Primary color
     borderRadius: 50,
     padding: 10,
     alignItems: "center",
@@ -339,7 +340,7 @@ const styles = StyleSheet.create({
   propertyTypeText: {
     fontSize: 12,
     fontWeight: "bold",
-    color: "#3B82F6", // Primary color
+    color: "#4CAF50", // Primary color
   },
   propertyRating: {
     flexDirection: "row",
@@ -533,11 +534,11 @@ const styles = StyleSheet.create({
   price: {
     fontSize: 18,
     fontWeight: "bold",
-    color: "#3B82F6", // Primary color
+    color: "#4CAF50", // Primary color
     marginLeft: 5,
   },
   bookButton: {
-    backgroundColor: "#3B82F6", // Primary color
+    backgroundColor: "#4CAF50", // Primary color
     borderRadius: 50,
     padding: 15,
   },
